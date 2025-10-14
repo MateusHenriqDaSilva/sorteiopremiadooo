@@ -129,6 +129,8 @@ export default function NumberModal({ isOpen, onClose, selectedNumber }: NumberM
                   <Image 
                     src="/qrcode.png" 
                     alt="QR Code PIX" 
+                    width={200}
+                    height={200}
                     className={styles.qrCode}
                   />
                 </div>

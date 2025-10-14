@@ -4,9 +4,7 @@ import { useState, useEffect } from 'react'
 import NumberModal from './NumberModal'
 import styles from '../styles/NumberGrid.module.css'
 
-interface NumberGridProps {}
-
-export default function NumberGrid({}: NumberGridProps) {
+export default function NumberGrid() {
   const [selectedNumber, setSelectedNumber] = useState<number | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isVisible, setIsVisible] = useState(false)

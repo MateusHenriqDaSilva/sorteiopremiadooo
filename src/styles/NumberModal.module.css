@@ -133,8 +133,7 @@
 }
 
 .qrCode {
-  width: 200px;
-  height: 200px;
+  border-radius: 0.375rem;
   object-fit: contain;
 }
 
@@ -288,9 +287,8 @@
     padding: 1rem;
   }
   
-  .qrCode {
-    width: 150px;
-    height: 150px;
+  .qrCodeImage {
+    padding: 0.75rem;
   }
   
   .pixKeyContainer {
