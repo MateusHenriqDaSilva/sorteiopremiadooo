@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { X, MessageCircle, Copy, Check } from 'lucide-react'
 import styles from '../styles/NumberModal.module.css'
+import Image from 'next/image'
 
 interface NumberModalProps {
   isOpen: boolean
@@ -125,7 +126,7 @@ export default function NumberModal({ isOpen, onClose, selectedNumber }: NumberM
               {/* QR Code */}
               <div className={styles.qrCodeContainer}>
                 <div className={styles.qrCodeImage}>
-                  <img 
+                  <Image 
                     src="/qrcode.png" 
                     alt="QR Code PIX" 
                     className={styles.qrCode}
