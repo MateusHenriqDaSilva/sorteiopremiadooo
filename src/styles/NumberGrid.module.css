@@ -1,0 +1,297 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #1f2937;
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.gridContainer {
+  width: 600px;
+  height: 600px;
+  max-width: 100%;
+  max-height: 100%;
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+  height: 100%;
+  width: 100%;
+}
+
+.numberButton {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #3b82f6, #7c3aed);
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 0.75rem;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.numberContent {
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.glowEffect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.numberButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+}
+
+.numberButton:hover .numberContent {
+  transform: scale(1.1);
+}
+
+.numberButton:hover .glowEffect {
+  opacity: 1;
+}
+
+.description {
+  text-align: center;
+  color: #6b7280;
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Animações de entrada */
+@keyframes fadeInDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fadeInDown {
+  animation: fadeInDown 0.6s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fadeInUp {
+  animation: fadeInUp 0.6s ease-out 0.3s forwards;
+}
+
+/* Animação escalonada para os números */
+@keyframes staggerAppear {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.stagger {
+  animation: staggerAppear 0.5s ease-out forwards;
+}
+
+/* Animação de flutuação suave */
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.02);
+  }
+}
+
+.float {
+  animation: gentleFloat 3s ease-in-out infinite;
+  animation-delay: 0.5s; /* Espera a animação de entrada terminar */
+}
+
+/* Animação de onda */
+@keyframes gentleWave {
+  0%, 100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-2px) rotate(-1deg);
+  }
+  75% {
+    transform: translateX(2px) rotate(1deg);
+  }
+}
+
+.wave {
+  animation: gentleWave 4s ease-in-out infinite;
+  animation-delay: 0.5s; /* Espera a animação de entrada terminar */
+}
+
+/* Efeito de brilho pulsante */
+@keyframes gentlePulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 0 rgba(59, 130, 246, 0.3),
+      0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 0 20px rgba(59, 130, 246, 0.6),
+      0 6px 15px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.numberButton::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #3b82f6, #7c3aed, #3b82f6);
+  border-radius: 0.85rem;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.numberButton:hover::before {
+  opacity: 1;
+  animation: gentlePulse 2s ease-in-out infinite;
+}
+
+/* Efeito de partículas no hover */
+.numberButton::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+  transition: all 0.4s ease;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+.numberButton:hover::after {
+  width: 100%;
+  height: 100%;
+}
+
+/* Animação de rotação de cores de fundo - APLICADA APÓS ANIMAÇÃO DE ENTRADA */
+@keyframes gradientShift {
+  0% {
+    background: linear-gradient(135deg, #3b82f6, #7c3aed);
+  }
+  25% {
+    background: linear-gradient(135deg, #7c3aed, #3b82f6);
+  }
+  50% {
+    background: linear-gradient(135deg, #3b82f6, #6366f1);
+  }
+  75% {
+    background: linear-gradient(135deg, #6366f1, #7c3aed);
+  }
+  100% {
+    background: linear-gradient(135deg, #3b82f6, #7c3aed);
+  }
+}
+
+/* Aplica gradientShift apenas após a animação de entrada */
+.stagger {
+  animation: staggerAppear 0.5s ease-out forwards;
+}
+
+.stagger.float {
+  animation: staggerAppear 0.5s ease-out forwards, gentleFloat 3s ease-in-out infinite 0.5s;
+}
+
+.stagger.wave {
+  animation: staggerAppear 0.5s ease-out forwards, gentleWave 4s ease-in-out infinite 0.5s;
+}
+
+/* Aplica gradientShift após um delay para não conflitar com a animação de entrada */
+.numberButton {
+  /* Gradient shift será aplicado via transition no hover */
+  transition: background 0.3s ease;
+}
+
+.numberButton:hover {
+  animation: gradientShift 2s ease-in-out infinite;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .gridContainer {
+    width: 95vw;
+    height: 95vw;
+    max-width: 500px;
+    max-height: 500px;
+  }
+  
+  .numberButton {
+    font-size: 0.875rem;
+  }
+  
+  .title {
+    font-size: 1.25rem;
+  }
+  
+  .description {
+    font-size: 0.875rem;
+  }
+}
+
+/* Melhoria para dispositivos muito pequenos */
+@media (max-width: 480px) {
+  .gridContainer {
+    width: 90vw;
+    height: 90vw;
+    padding: 0.5rem;
+  }
+  
+  .grid {
+    gap: 0.25rem;
+  }
+  
+  .numberButton {
+    font-size: 0.75rem;
+  }
+}

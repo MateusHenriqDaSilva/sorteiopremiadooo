@@ -1,0 +1,11 @@
+.mainContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to bottom, #dbeafe, #f3e8ff);
+}
+
+.mainContent {
+  flex: 1;
+  padding: 2rem 0;
+}
