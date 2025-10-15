@@ -19,7 +19,7 @@ export default function NumberModal({ isOpen, onClose, selectedNumber }: NumberM
   const [copied, setCopied] = useState(false)
 
   const whatsappNumber = "14981706898";
-  const pixKey = "00020126580014BR.GOV.BCB.PIX01368b89d9e9-872f-4bc1-8604-0668d77608b95204000053039865802BR5925Jose Francisco de Souza F6009SAO PAULO62140510MrnoLZWEZT63042E50";
+  const pixKey = "00020126580014BR.GOV.BCB.PIX01368b89d9e9-872f-4bc1-8604-0668d77608b9520400005303986540510.005802BR5925Jose Francisco de Souza F6009SAO PAULO62140510E2yOSC5rxh6304DF41";
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
