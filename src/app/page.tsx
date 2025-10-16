@@ -8,10 +8,19 @@ export default function Home() {
       minHeight: '100vh',
       display: 'flex',
       flexDirection: 'column',
-      background: 'linear-gradient(to bottom, #dbeafe, #f3e8ff)'
+      background: 'linear-gradient(to bottom, #dbeafe, #f3e8ff)',
+      justifyContent: 'space-between' // Distribui o espaço uniformemente
     }}>
       <Header />
-      <main style={{ flex: '1', padding: '2rem 0' }}>
+      <main style={{ 
+        flex: '1 0 auto', // Cresce mas não encolhe abaixo do conteúdo
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center', // Centraliza verticalmente
+        alignItems: 'center',
+        width: '100%',
+        padding: '1rem 0' // Padding reduzido
+      }}>
         <NumberGrid />
       </main>
       <Footer />

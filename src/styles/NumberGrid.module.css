@@ -1,65 +1,156 @@
+/* Container principal - ESPAÇAMENTO MÍNIMO */
 .container {
+  min-height: auto;
+  padding: 0px 0 !important; /* Apenas 5px topo e rodapé */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+/* Layout de 3 colunas - MAIS APERTADO */
+.threeColumnLayout {
+  display: grid;
+  grid-template-columns: 200px 1fr 200px;
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 0.5rem;
+  align-items: start;
+  min-height: auto;
+}
+
+/* Coluna Esquerda */
+.leftColumn {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 1rem;
+  position: sticky;
+  top: 5px; /* Apenas 5px do topo */
 }
 
-.title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: #1f2937;
-  opacity: 0;
-  transform: translateY(-20px);
+.bannerContainer {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.banner {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Coluna Central - ULTRA COMPACTA */
+.centerColumn {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: auto;
+  margin-top: 0; /* ZERO margin top */
 }
 
 .gridContainer {
-  width: 600px;
-  height: 600px;
-  max-width: 100%;
-  max-height: 100%;
-  background-color: white;
-  border-radius: 0.75rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  padding: 1rem;
-  border: 1px solid #e5e7eb;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 0.5rem;
-  height: 100%;
+  gap: 0.4rem;
+  max-width: 100%;
+  width: fit-content;
+  padding: 0.25rem;
+  margin: 0 auto;
+}
+
+/* Coluna Direita */
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: sticky;
+  top: 5px; /* Apenas 5px do topo */
+}
+
+.prizesContainer {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 0.8rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  color: white;
   width: 100%;
 }
 
-.numberButton {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #3b82f6, #7c3aed);
-  color: white;
+.prizesTitle {
+  text-align: center;
+  margin-bottom: 0.6rem;
   font-size: 1rem;
   font-weight: bold;
-  border-radius: 0.75rem;
-  border: none;
-  cursor: pointer;
+}
+
+.prizeItem {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.prizeItem:last-child {
+  border-bottom: none;
+}
+
+.medal {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.prizeInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+
+.prizePlace {
+  font-size: 0.7rem;
+  opacity: 0.9;
+}
+
+.prizeValue {
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+/* Botões dos números ULTRA COMPACTOS */
+.numberButton {
   position: relative;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
   overflow: hidden;
-  transition: all 0.3s ease;
-  opacity: 0;
-  transform: scale(0.8);
+}
+
+.numberButton:hover {
+  transform: scale(1.03);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
 }
 
 .numberContent {
   position: relative;
   z-index: 2;
-  transition: all 0.3s ease;
 }
 
 .glowEffect {
@@ -68,230 +159,147 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+  background: radial-gradient(circle at center, rgba(255,255,255,0.3) 0%, transparent 70%);
   opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.numberButton:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
-}
-
-.numberButton:hover .numberContent {
-  transform: scale(1.1);
+  transition: opacity 0.2s ease;
 }
 
 .numberButton:hover .glowEffect {
   opacity: 1;
 }
 
+/* Título e descrição COM ESPAÇAMENTO MÍNIMO */
+.title {
+  text-align: center;
+  margin-bottom: 5px !important; /* Apenas 5px */
+  font-size: 1.4rem;
+  color: #333;
+  padding: 0 0.5rem;
+}
+
 .description {
   text-align: center;
-  color: #6b7280;
-  margin-top: 1.5rem;
-  font-size: 1rem;
-  opacity: 0;
-  transform: translateY(20px);
+  margin-top: 5px !important; /* Apenas 5px */
+  font-size: 0.75rem;
+  color: #666;
+  padding: 0 0.5rem;
 }
 
-/* Animações de entrada */
-@keyframes fadeInDown {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
+/* Animações RÁPIDAS */
 .fadeInDown {
-  animation: fadeInDown 0.6s ease-out forwards;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  animation: fadeInDown 0.3s ease-out;
 }
 
 .fadeInUp {
-  animation: fadeInUp 0.6s ease-out 0.3s forwards;
+  animation: fadeInUp 0.3s ease-out;
 }
 
-/* Animação escalonada para os números */
-@keyframes staggerAppear {
+.stagger {
+  opacity: 0;
+  animation: fadeInStagger 0.2s ease-out forwards;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(0);
   }
 }
 
-.stagger {
-  animation: staggerAppear 0.5s ease-out forwards;
-}
-
-/* Animação de flutuação suave */
-@keyframes gentleFloat {
-  0%, 100% {
-    transform: translateY(0) scale(1);
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
-  50% {
-    transform: translateY(-8px) scale(1.02);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-.float {
-  animation: gentleFloat 3s ease-in-out infinite;
-  animation-delay: 0.5s; /* Espera a animação de entrada terminar */
-}
-
-/* Animação de onda */
-@keyframes gentleWave {
-  0%, 100% {
-    transform: translateX(0) rotate(0deg);
-  }
-  25% {
-    transform: translateX(-2px) rotate(-1deg);
-  }
-  75% {
-    transform: translateX(2px) rotate(1deg);
+@keyframes fadeInStagger {
+  to {
+    opacity: 1;
   }
 }
 
-.wave {
-  animation: gentleWave 4s ease-in-out infinite;
-  animation-delay: 0.5s; /* Espera a animação de entrada terminar */
-}
-
-/* Efeito de brilho pulsante */
-@keyframes gentlePulse {
-  0%, 100% {
-    box-shadow: 
-      0 0 0 rgba(59, 130, 246, 0.3),
-      0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  50% {
-    box-shadow: 
-      0 0 20px rgba(59, 130, 246, 0.6),
-      0 6px 15px rgba(0, 0, 0, 0.15);
-  }
-}
-
-.numberButton::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(45deg, #3b82f6, #7c3aed, #3b82f6);
-  border-radius: 0.85rem;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.numberButton:hover::before {
-  opacity: 1;
-  animation: gentlePulse 2s ease-in-out infinite;
-}
-
-/* Efeito de partículas no hover */
-.numberButton::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
-  transition: all 0.4s ease;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-}
-
-.numberButton:hover::after {
-  width: 100%;
-  height: 100%;
-}
-
-/* Animação de rotação de cores de fundo - APLICADA APÓS ANIMAÇÃO DE ENTRADA */
-@keyframes gradientShift {
-  0% {
-    background: linear-gradient(135deg, #3b82f6, #7c3aed);
-  }
-  25% {
-    background: linear-gradient(135deg, #7c3aed, #3b82f6);
-  }
-  50% {
-    background: linear-gradient(135deg, #3b82f6, #6366f1);
-  }
-  75% {
-    background: linear-gradient(135deg, #6366f1, #7c3aed);
-  }
-  100% {
-    background: linear-gradient(135deg, #3b82f6, #7c3aed);
-  }
-}
-
-/* Aplica gradientShift apenas após a animação de entrada */
-.stagger {
-  animation: staggerAppear 0.5s ease-out forwards;
-}
-
-.stagger.float {
-  animation: staggerAppear 0.5s ease-out forwards, gentleFloat 3s ease-in-out infinite 0.5s;
-}
-
-.stagger.wave {
-  animation: staggerAppear 0.5s ease-out forwards, gentleWave 4s ease-in-out infinite 0.5s;
-}
-
-/* Aplica gradientShift após um delay para não conflitar com a animação de entrada */
-.numberButton {
-  /* Gradient shift será aplicado via transition no hover */
-  transition: background 0.3s ease;
-}
-
-.numberButton:hover {
-  animation: gradientShift 2s ease-in-out infinite;
-}
-
-/* Responsivo */
+/* MOBILE - mantém espaçamento mínimo também */
 @media (max-width: 768px) {
-  .gridContainer {
-    width: 95vw;
-    height: 95vw;
-    max-width: 500px;
-    max-height: 500px;
+  .threeColumnLayout {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    max-width: 400px;
+    padding: 0 0.5rem;
+  }
+  
+  .leftColumn,
+  .rightColumn {
+    position: static;
+    order: 2;
+  }
+  
+  .centerColumn {
+    order: 1;
+    margin-top: 0;
+  }
+  
+  .bannerContainer {
+    max-width: 250px;
+    margin: 0 auto;
+  }
+  
+  .prizesContainer {
+    max-width: 250px;
+    margin: 0 auto;
+    padding: 0.8rem;
   }
   
   .numberButton {
-    font-size: 0.875rem;
-  }
-  
-  .title {
-    font-size: 1.25rem;
-  }
-  
-  .description {
-    font-size: 0.875rem;
-  }
-}
-
-/* Melhoria para dispositivos muito pequenos */
-@media (max-width: 480px) {
-  .gridContainer {
-    width: 90vw;
-    height: 90vw;
-    padding: 0.5rem;
+    width: 44px;
+    height: 44px;
+    font-size: 0.9rem;
   }
   
   .grid {
-    gap: 0.25rem;
+    gap: 0.6rem;
+    padding: 0.25rem;
+  }
+  
+  .container {
+    padding: 5px 0 !important;
+  }
+  
+  .title {
+    font-size: 1.3rem;
+    margin-bottom: 5px !important;
+  }
+  
+  .description {
+    margin-top: 5px !important;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    gap: 0.5rem;
   }
   
   .numberButton {
-    font-size: 0.75rem;
+    width: 40px;
+    height: 40px;
+    font-size: 0.85rem;
+  }
+  
+  .threeColumnLayout {
+    gap: 0.6rem;
+  }
+  
+  .container {
+    padding: 5px 0 !important;
   }
 }

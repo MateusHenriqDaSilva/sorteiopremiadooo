@@ -27,19 +27,7 @@ export default function NumberGrid() {
 
   // Função para gerar delay escalonado
   const getStaggerDelay = (index: number) => {
-    return { animationDelay: `${index * 0.05}s` }
-  }
-
-  // Função para gerar animação baseada na posição
-  const getPositionAnimation = (index: number) => {
-    const row = Math.floor(index / 5)
-    const col = index % 5
-    
-    if (row % 2 === 0) {
-      return col % 2 === 0 ? styles.float : styles.wave
-    } else {
-      return col % 2 === 0 ? styles.wave : styles.float
-    }
+    return { animationDelay: `${index * 0.01}s` }
   }
 
   return (
@@ -49,21 +37,65 @@ export default function NumberGrid() {
           Escolha seu número da sorte!
         </h1>
         
-        <div className={styles.gridContainer}>
-          <div className={styles.grid}>
-            {numbers.map((number, index) => (
-              <button
-                key={number}
-                onClick={() => handleNumberClick(number)}
-                className={`${styles.numberButton} ${getPositionAnimation(index)} ${styles.stagger}`}
-                style={getStaggerDelay(index)}
-              >
-                <span className={styles.numberContent}>
-                  {number}
-                </span>
-                <div className={styles.glowEffect}></div>
-              </button>
-            ))}
+        <div className={styles.threeColumnLayout}>
+          {/* Coluna Esquerda - Banner */}
+          <div className={styles.leftColumn}>
+            <div className={styles.bannerContainer}>
+              <img 
+                src="/banner.jpg" 
+                alt="Premiação" 
+                className={styles.banner}
+              />
+            </div>
+          </div>
+
+          {/* Coluna Central - Jogo (maior) */}
+          <div className={styles.centerColumn}>
+            <div className={styles.gridContainer}>
+              <div className={styles.grid}>
+                {numbers.map((number, index) => (
+                  <button
+                    key={number}
+                    onClick={() => handleNumberClick(number)}
+                    className={`${styles.numberButton} ${styles.stagger}`}
+                    style={getStaggerDelay(index)}
+                  >
+                    <span className={styles.numberContent}>
+                      {number}
+                    </span>
+                    <div className={styles.glowEffect}></div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Coluna Direita - Premiação */}
+          <div className={styles.rightColumn}>
+            <div className={styles.prizesContainer}>
+              <h3 className={styles.prizesTitle}>🏆 Premiação</h3>
+              <div className={styles.prizeItem}>
+                <span className={styles.medal}>🥇</span>
+                <div className={styles.prizeInfo}>
+                  <span className={styles.prizePlace}>1º Lugar</span>
+                  <span className={styles.prizeValue}>R$ 150,00</span>
+                </div>
+              </div>
+              <div className={styles.prizeItem}>
+                <span className={styles.medal}>🥈</span>
+                <div className={styles.prizeInfo}>
+                  <span className={styles.prizePlace}>2º Lugar</span>
+                  <span className={styles.prizeValue}>R$ 75,00</span>
+                </div>
+              </div>
+              <div className={styles.prizeItem}>
+                <span className={styles.medal}>🥉</span>
+                <div className={styles.prizeInfo}>
+                  <span className={styles.prizePlace}>3º Lugar</span>
+                  <span className={styles.prizeValue}>R$ 75,00</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
