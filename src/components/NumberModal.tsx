@@ -94,7 +94,8 @@ export default function NumberModal({ isOpen, onClose, selectedNumber }: NumberM
       await navigator.clipboard.writeText(pixLink)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
-    } catch (err) {
+    } catch {
+      // Fallback para navegadores mais antigos
       const textArea = document.createElement('textarea')
       textArea.value = pixLink
       document.body.appendChild(textArea)
@@ -209,10 +210,10 @@ export default function NumberModal({ isOpen, onClose, selectedNumber }: NumberM
                 <h4>Como participar:</h4>
                 <ol>
                   <li>Preencha seus dados acima</li>
-                  <li>Clique em "Abrir PIX"</li>
+                  <li>Clique em &quot;Abrir PIX&quot;</li>
                   <li>Pague R$ {formatarValor(valorFixo)}</li>
                   <li>Salve o comprovante</li>
-                  <li>Clique em "Finalizar Compra"</li>
+                  <li>Clique em &quot;Finalizar Compra&quot;</li>
                 </ol>
               </div>
             </div>
