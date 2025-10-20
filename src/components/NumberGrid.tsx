@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import NumberModal from './NumberModal'
 import styles from '../styles/NumberGrid.module.css'
 
@@ -41,10 +42,17 @@ export default function NumberGrid() {
           {/* Coluna Esquerda - Banner */}
           <div className={styles.leftColumn}>
             <div className={styles.bannerContainer}>
-              <img 
+              <Image 
                 src="/banner.jpg" 
                 alt="Premiação" 
                 className={styles.banner}
+                width={280}
+                height={400}
+                priority
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                }}
               />
             </div>
           </div>
