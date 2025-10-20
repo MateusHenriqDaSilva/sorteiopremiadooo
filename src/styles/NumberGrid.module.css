@@ -1,40 +1,59 @@
-/* Container principal - ESPAÇAMENTO MÍNIMO */
+/* CONTAINER PRINCIPAL */
 .container {
+  width: 100%;
   min-height: auto;
-  padding: 0px 0 !important; /* Apenas 5px topo e rodapé */
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+/* TÍTULO E DESCRIÇÃO */
+.title {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 1.8rem;
+  color: #333;
+  padding: 0 1rem;
   width: 100%;
 }
 
-/* Layout de 3 colunas - MAIS APERTADO */
+.description {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 1rem;
+  color: #666;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+/* LAYOUT DAS COLUNAS */
 .threeColumnLayout {
   display: grid;
-  grid-template-columns: 200px 1fr 200px;
-  gap: 1rem;
-  max-width: 1100px;
+  grid-template-columns: 280px 1fr 280px;
+  gap: 1.5rem;
+  max-width: 1300px;
+  width: 100%;
   margin: 0 auto;
-  padding: 0 0.5rem;
+  padding: 0 1rem;
   align-items: start;
-  min-height: auto;
 }
 
-/* Coluna Esquerda */
-.leftColumn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* COLUNAS LATERAIS */
+.leftColumn,
+.rightColumn {
   position: sticky;
-  top: 5px; /* Apenas 5px do topo */
+  top: 10px;
+  height: fit-content;
 }
 
+/* BANNER */
 .bannerContainer {
   width: 100%;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .banner {
@@ -43,63 +62,29 @@
   display: block;
 }
 
-/* Coluna Central - ULTRA COMPACTA */
-.centerColumn {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: auto;
-  margin-top: 0; /* ZERO margin top */
-}
-
-.gridContainer {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0.4rem;
-  max-width: 100%;
-  width: fit-content;
-  padding: 0.25rem;
-  margin: 0 auto;
-}
-
-/* Coluna Direita */
-.rightColumn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: sticky;
-  top: 5px; /* Apenas 5px do topo */
-}
-
+/* PREMIAÇÃO */
 .prizesContainer {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 0.8rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  padding: 1.2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
   color: white;
   width: 100%;
 }
 
 .prizesTitle {
   text-align: center;
-  margin-bottom: 0.6rem;
-  font-size: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
   font-weight: bold;
 }
 
 .prizeItem {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.4rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  gap: 0.6rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .prizeItem:last-child {
@@ -107,45 +92,71 @@
 }
 
 .medal {
-  font-size: 1.3rem;
-  flex-shrink: 0;
+  font-size: 1.8rem;
 }
 
 .prizeInfo {
   display: flex;
   flex-direction: column;
-  gap: 0.05rem;
+  gap: 0.1rem;
 }
 
 .prizePlace {
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   opacity: 0.9;
 }
 
 .prizeValue {
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: bold;
 }
 
-/* Botões dos números ULTRA COMPACTOS */
+/* COLUNA CENTRAL - CARTELA */
+.centerColumn {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.gridContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.1rem;
+  padding: 0.5rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+}
+
+/* BOTÕES DOS NÚMEROS */
 .numberButton {
   position: relative;
-  width: 38px;
-  height: 38px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
   border: none;
   border-radius: 6px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   overflow: hidden;
+  min-width: 0;
 }
 
 .numberButton:hover {
-  transform: scale(1.03);
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5);
 }
 
 .numberContent {
@@ -159,33 +170,16 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at center, rgba(255,255,255,0.3) 0%, transparent 70%);
+  background: radial-gradient(circle at center, rgba(255,255,255,0.4) 0%, transparent 70%);
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.3s ease;
 }
 
 .numberButton:hover .glowEffect {
   opacity: 1;
 }
 
-/* Título e descrição COM ESPAÇAMENTO MÍNIMO */
-.title {
-  text-align: center;
-  margin-bottom: 5px !important; /* Apenas 5px */
-  font-size: 1.4rem;
-  color: #333;
-  padding: 0 0.5rem;
-}
-
-.description {
-  text-align: center;
-  margin-top: 5px !important; /* Apenas 5px */
-  font-size: 0.75rem;
-  color: #666;
-  padding: 0 0.5rem;
-}
-
-/* Animações RÁPIDAS */
+/* ANIMAÇÕES */
 .fadeInDown {
   animation: fadeInDown 0.3s ease-out;
 }
@@ -227,79 +221,87 @@
   }
 }
 
-/* MOBILE - mantém espaçamento mínimo também */
+/* MOBILE - LAYOUT SIMPLIFICADO */
 @media (max-width: 768px) {
+  .container {
+    padding: 10px 0;
+  }
+
   .threeColumnLayout {
     grid-template-columns: 1fr;
-    gap: 0.8rem;
-    max-width: 400px;
+    gap: 1rem;
     padding: 0 0.5rem;
+    max-width: 100%;
   }
-  
+
   .leftColumn,
   .rightColumn {
     position: static;
-    order: 2;
+    width: 100%;
   }
-  
+
   .centerColumn {
-    order: 1;
-    margin-top: 0;
+    order: -1;
   }
-  
-  .bannerContainer {
-    max-width: 250px;
-    margin: 0 auto;
-  }
-  
-  .prizesContainer {
-    max-width: 250px;
-    margin: 0 auto;
-    padding: 0.8rem;
-  }
-  
-  .numberButton {
-    width: 44px;
-    height: 44px;
-    font-size: 0.9rem;
-  }
-  
+
   .grid {
-    gap: 0.6rem;
-    padding: 0.25rem;
+    max-width: 100%;
+    gap: 0.15rem;
+    padding: 0.4rem;
   }
-  
-  .container {
-    padding: 5px 0 !important;
+
+  .numberButton {
+    font-size: 1.1rem;
   }
-  
+
   .title {
-    font-size: 1.3rem;
-    margin-bottom: 5px !important;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
   }
-  
+
   .description {
-    margin-top: 5px !important;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+    margin-top: 10px;
+  }
+
+  .bannerContainer,
+  .prizesContainer {
+    max-width: 400px;
+    margin: 0 auto;
   }
 }
 
+/* MOBILE PEQUENO */
 @media (max-width: 480px) {
-  .grid {
-    gap: 0.5rem;
-  }
-  
-  .numberButton {
-    width: 40px;
-    height: 40px;
-    font-size: 0.85rem;
-  }
-  
   .threeColumnLayout {
-    gap: 0.6rem;
+    padding: 0 0.25rem;
+    gap: 0.8rem;
   }
-  
-  .container {
-    padding: 5px 0 !important;
+
+  .grid {
+    gap: 0.1rem;
+    padding: 0.3rem;
+  }
+
+  .numberButton {
+    font-size: 1rem;
+  }
+
+  .title {
+    font-size: 1.3rem;
+    padding: 0 0.5rem;
+  }
+
+  .description {
+    font-size: 0.85rem;
+    padding: 0 0.5rem;
+  }
+
+  .prizesContainer {
+    padding: 1rem;
+  }
+
+  .prizeItem {
+    padding: 0.4rem 0;
   }
 }

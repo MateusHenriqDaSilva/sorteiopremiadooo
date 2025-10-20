@@ -1,3 +1,4 @@
+/* NumberModal.module.css */
 .overlay {
   position: fixed;
   top: 0;
@@ -6,50 +7,54 @@
   bottom: 0;
   background: rgba(0, 0, 0, 0.7);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   z-index: 1000;
   padding: 1rem;
+  overflow: hidden; /* IMPORTANTE: impede scroll externo */
 }
 
 .modal {
   background: white;
-  border-radius: 1rem;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  width: 100%;
+  border-radius: 12px;
   max-width: 500px;
+  width: 100%;
   max-height: 90vh;
   overflow-y: auto;
+  margin: 0; /* Remove margens que podem causar problemas */
 }
 
 .header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   padding: 1.5rem;
   border-bottom: 1px solid #e5e7eb;
+  background: #667eea;
+  color: white;
+  border-radius: 12px 12px 0 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
-.title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #1f2937;
+.header h2 {
   margin: 0;
+  font-size: 1.5rem;
 }
 
 .closeButton {
-  background: none;
+  background: rgba(255, 255, 255, 0.2);
   border: none;
-  color: #6b7280;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 0.375rem;
-  transition: all 0.2s;
-}
-
-.closeButton:hover {
-  background: #f3f4f6;
-  color: #374151;
+  color: white;
+  flex-shrink: 0; /* Impede que o botão encolha */
 }
 
 .content {
@@ -59,7 +64,7 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .formGroup {
@@ -68,236 +73,294 @@
   gap: 0.5rem;
 }
 
-.label {
-  font-weight: 500;
+.formGroup label {
+  font-weight: 600;
   color: #374151;
-  font-size: 0.875rem;
 }
 
 .input {
   padding: 0.75rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.5rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
   font-size: 1rem;
-  transition: all 0.2s;
+  width: 100%;
+  box-sizing: border-box; /* IMPORTANTE: inclui padding na largura */
 }
 
 .input:focus {
   outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  border-color: #667eea;
 }
 
-.input::placeholder {
-  color: #9ca3af;
-}
-
-/* Área do PIX */
 .pixArea {
   background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 0.75rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
   padding: 1.5rem;
 }
 
-.pixTitle {
+.pixHeader {
   text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.pixMainText {
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: #1e293b;
-  margin-bottom: 0.25rem;
-}
-
-.pixSubText {
-  color: #64748b;
-  font-size: 0.875rem;
-}
-
-/* Container do QR Code */
-.qrCodeContainer {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.qrCodeImage {
-  background: white;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid #e2e8f0;
-  display: inline-block;
-  margin-bottom: 0.75rem;
-}
-
-.qrCode {
-  border-radius: 0.375rem;
-  object-fit: contain;
-}
-
-.qrCodeLabel {
-  color: #64748b;
-  font-size: 0.875rem;
-  margin: 0;
-}
-
-/* Informações do PIX */
-.pixInfo {
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 0.5rem;
-  padding: 1rem;
-}
-
-.pixKeySection {
   margin-bottom: 1rem;
 }
 
-.pixKeyLabel {
-  display: block;
-  font-weight: 500;
-  color: #374151;
-  font-size: 0.875rem;
-  margin-bottom: 0.5rem;
+.pixHeader h3 {
+  margin: 0 0 0.5rem 0;
+  color: #1e293b;
 }
 
-.pixKeyContainer {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 0.375rem;
-  padding: 0.75rem;
-}
-
-.pixKey {
-  flex: 1;
-  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-  font-size: 0.75rem;
-  color: #374151;
-  word-break: break-all;
-  line-height: 1.4;
-}
-
-.copyButton {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  background: #3b82f6;
-  color: white;
-  border: none;
-  border-radius: 0.375rem;
-  padding: 0.5rem 0.75rem;
-  font-size: 0.75rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-  white-space: nowrap;
-}
-
-.copyButton:hover {
-  background: #2563eb;
-}
-
-.copyButton.copied {
-  background: #10b981;
-}
-
-.copyButton.copied:hover {
-  background: #059669;
-}
-
-.copyText {
-  font-size: 0.7rem;
+.pixHeader p {
+  margin: 0;
+  color: #64748b;
 }
 
 .pixValue {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #10b981;
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.pixValue span {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+.pixLinkBox {
+  margin-bottom: 1rem;
+}
+
+.pixLinkBox span {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.pixLinkBox code {
+  background: #1e293b;
+  color: #e2e8f0;
   padding: 0.75rem;
-  background: #dcfce7;
-  border: 1px solid #bbf7d0;
-  border-radius: 0.375rem;
-  color: #166534;
-  font-size: 1rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  word-break: break-all;
+  display: block;
+  margin-bottom: 0.75rem;
+  font-family: monospace;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+}
+
+.buttons {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.copyBtn, .openBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem; /* Aumentado para mobile */
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  flex: 1;
+  min-height: 44px; /* Tamanho mínimo para touch */
+}
+
+.copyBtn {
+  background: #3b82f6;
+  color: white;
+}
+
+.openBtn {
+  background: #8b5cf6;
+  color: white;
+}
+
+.instructions {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.instructions h4 {
+  margin: 0 0 0.5rem 0;
+  color: #1e293b;
+}
+
+.instructions ol {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: #475569;
+}
+
+.instructions li {
+  margin-bottom: 0.25rem;
 }
 
 .alert {
   background: #fef3cd;
   border: 1px solid #fde68a;
-  border-radius: 0.5rem;
+  border-radius: 8px;
   padding: 1rem;
 }
 
-.alertText {
-  color: #92400e;
-  font-size: 0.875rem;
+.alert p {
   margin: 0;
-  line-height: 1.5;
+  color: #92400e;
+  font-size: 0.9rem;
 }
 
-.whatsappButton {
+.whatsappBtn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 1rem;
   background: #25d366;
   color: white;
   border: none;
-  border-radius: 0.75rem;
-  padding: 1rem 1.5rem;
+  border-radius: 8px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s;
-  width: 100%;
+  min-height: 50px; /* Tamanho bom para touch */
 }
 
-.whatsappButton:hover:not(:disabled) {
-  background: #128c7e;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
-}
-
-.whatsappButton:disabled {
+.whatsappBtn:disabled {
   background: #9ca3af;
   cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
 }
 
-/* Responsivo */
-@media (max-width: 640px) {
+/* MOBILE FIRST APPROACH */
+@media (max-width: 768px) {
+  .overlay {
+    padding: 0.5rem;
+    align-items: flex-start; /* Começa do topo no mobile */
+    padding-top: 2rem; /* Espaço para status bar */
+  }
+
   .modal {
-    margin: 1rem;
     max-height: 95vh;
+    margin: 0 auto;
   }
-  
+
   .header {
-    padding: 1rem;
+    padding: 1rem 1.25rem;
+    position: sticky;
+    top: 0;
   }
-  
+
+  .header h2 {
+    font-size: 1.3rem;
+  }
+
+  .closeButton {
+    width: 35px;
+    height: 35px;
+  }
+
+  .content {
+    padding: 1.25rem;
+  }
+
+  .pixArea {
+    padding: 1.25rem;
+  }
+
+  .pixValue {
+    font-size: 1.1rem;
+    padding: 0.875rem;
+  }
+
+  .buttons {
+    flex-direction: column; /* Botões empilhados no mobile */
+  }
+
+  .copyBtn, .openBtn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .overlay {
+    padding: 0.25rem;
+    padding-top: 1rem;
+  }
+
+  .modal {
+    max-height: 98vh;
+    border-radius: 10px;
+  }
+
+  .header {
+    padding: 0.875rem 1rem;
+  }
+
+  .header h2 {
+    font-size: 1.2rem;
+  }
+
   .content {
     padding: 1rem;
   }
-  
+
   .pixArea {
     padding: 1rem;
   }
-  
-  .qrCodeImage {
-    padding: 0.75rem;
+
+  .pixLinkBox code {
+    font-size: 0.75rem;
+    padding: 0.625rem;
   }
-  
-  .pixKeyContainer {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.75rem;
+
+  .instructions {
+    padding: 0.875rem;
   }
-  
-  .copyButton {
-    justify-content: center;
+
+  .instructions ol {
+    padding-left: 1rem;
+  }
+
+  .alert {
+    padding: 0.875rem;
   }
 }
+
+/* Para telas muito pequenas */
+@media (max-width: 360px) {
+  .header h2 {
+    font-size: 1.1rem;
+  }
+
+  .input {
+    padding: 0.625rem;
+    font-size: 0.9rem;
+  }
+
+  .pixValue {
+    font-size: 1rem;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .whatsappBtn {
+    padding: 0.875rem;
+    font-size: 0.9rem;
+  }
+} 

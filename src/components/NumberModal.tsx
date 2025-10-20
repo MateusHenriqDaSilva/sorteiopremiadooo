@@ -1,9 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { X, MessageCircle, Copy, Check } from 'lucide-react'
+import { X, MessageCircle, Copy, Check, ExternalLink } from 'lucide-react'
 import styles from '../styles/NumberModal.module.css'
-import Image from 'next/image'
 
 interface NumberModalProps {
   isOpen: boolean
@@ -18,22 +17,28 @@ export default function NumberModal({ isOpen, onClose, selectedNumber }: NumberM
   })
   const [copied, setCopied] = useState(false)
 
-  const whatsappNumber = "14981706898";
-  const pixKey = "00020126580014BR.GOV.BCB.PIX01368b89d9e9-872f-4bc1-8604-0668d77608b9520400005303986540510.005802BR5925Jose Francisco de Souza F6009SAO PAULO62140510E2yOSC5rxh6304DF41";
+  const whatsappNumber = "14981706898"
+  const pixLink = "https://link.mercadopago.com.br/chicofinanceiro"
+  const valorFixo = 10.00 // Mudado para número
   
+  // Função para formatar o valor para exibição
+  const formatarValor = (valor: number) => {
+    return valor.toFixed(2).replace('.', ',')
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     
     if (!formData.nomeCompleto || !formData.telefone) {
-      alert('Por favor, preencha todos os campos obrigatórios.')
+      alert('Preencha todos os campos.')
       return
     }
 
-    const message = `🎯 *INSCRIÇÃO NO SORTEIO* 🎯\n\n*Dados da Inscrição:*\n• Nome: ${formData.nomeCompleto}\n• Telefone: ${formData.telefone}\n• Número da Sorte: ${selectedNumber}\n\n💰 *Pagamento via PIX:*\n• Chave: ${pixKey}\n• Valor: R$ 10,00\n\n📎 Estou enviando o comprovante do PIX em anexo. Por favor, confirme o recebimento!`;
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    const message = `INSCRIÇÃO NO SORTEIO\n\nNome: ${formData.nomeCompleto}\nTelefone: ${formData.telefone}\nNúmero: ${selectedNumber}\n\nPIX: R$ ${formatarValor(valorFixo)}\nLink: ${pixLink}`
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
     
-    window.open(whatsappUrl, '_blank');
-    onClose();
+    window.open(whatsappUrl, '_blank')
+    onClose()
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,16 +49,14 @@ export default function NumberModal({ isOpen, onClose, selectedNumber }: NumberM
     }))
   }
 
-  const copyPixKey = async () => {
+  const copyPixLink = async () => {
     try {
-      await navigator.clipboard.writeText(pixKey)
+      await navigator.clipboard.writeText(pixLink)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch (err) {
-      console.error('Falha ao copiar a chave PIX:', err)
-      // Fallback para dispositivos mais antigos
       const textArea = document.createElement('textarea')
-      textArea.value = pixKey
+      textArea.value = pixLink
       document.body.appendChild(textArea)
       textArea.select()
       document.execCommand('copy')
@@ -63,50 +66,41 @@ export default function NumberModal({ isOpen, onClose, selectedNumber }: NumberM
     }
   }
 
+  const openPixLink = () => {
+    window.open(pixLink, '_blank')
+  }
+
   if (!isOpen) return null
 
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-        {/* Cabeçalho do Modal */}
         <div className={styles.header}>
-          <h2 className={styles.title}>
-            Número {selectedNumber}
-          </h2>
-          <button
-            onClick={onClose}
-            className={styles.closeButton}
-          >
+          <h2>Número {selectedNumber}</h2>
+          <button onClick={onClose} className={styles.closeButton}>
             <X size={24} />
           </button>
         </div>
 
-        {/* Conteúdo do Modal */}
         <div className={styles.content}>
           <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.formGroup}>
-              <label htmlFor="nomeCompleto" className={styles.label}>
-                Nome Completo *
-              </label>
+              <label>Nome Completo *</label>
               <input
                 type="text"
-                id="nomeCompleto"
                 name="nomeCompleto"
                 required
                 value={formData.nomeCompleto}
                 onChange={handleInputChange}
                 className={styles.input}
-                placeholder="Digite seu nome completo"
+                placeholder="Seu nome completo"
               />
             </div>
 
             <div className={styles.formGroup}>
-              <label htmlFor="telefone" className={styles.label}>
-                Número de Telefone *
-              </label>
+              <label>Telefone *</label>
               <input
                 type="tel"
-                id="telefone"
                 name="telefone"
                 required
                 value={formData.telefone}
@@ -116,68 +110,54 @@ export default function NumberModal({ isOpen, onClose, selectedNumber }: NumberM
               />
             </div>
 
-            {/* Área da imagem do PIX */}
             <div className={styles.pixArea}>
-              <div className={styles.pixTitle}>
-                <div className={styles.pixMainText}>Pagamento via PIX</div>
-                <div className={styles.pixSubText}>Escaneie o QR Code abaixo</div>
+              <div className={styles.pixHeader}>
+                <h3>Pagamento PIX</h3>
+                <p>Valor fixo: R$ {formatarValor(valorFixo)}</p>
               </div>
               
-              {/* QR Code */}
-              <div className={styles.qrCodeContainer}>
-                <div className={styles.qrCodeImage}>
-                  <Image 
-                    src="/qrcode.png" 
-                    alt="QR Code PIX" 
-                    width={200}
-                    height={200}
-                    className={styles.qrCode}
-                  />
+              <div className={styles.pixValue}>
+                <strong>R$ {formatarValor(valorFixo)}</strong>
+                <span>FIXO</span>
+              </div>
+              
+              <div className={styles.pixLinkBox}>
+                <span>Link PIX:</span>
+                <code>{pixLink}</code>
+                <div className={styles.buttons}>
+                  <button type="button" onClick={copyPixLink} className={styles.copyBtn}>
+                    {copied ? <Check size={16} /> : <Copy size={16} />}
+                    {copied ? 'Copiado!' : 'Copiar'}
+                  </button>
+                  <button type="button" onClick={openPixLink} className={styles.openBtn}>
+                    <ExternalLink size={16} />
+                    Abrir PIX
+                  </button>
                 </div>
-                <p className={styles.qrCodeLabel}>Escaneie com seu app bancário</p>
               </div>
 
-              <div className={styles.pixInfo}>
-                <div className={styles.pixKeySection}>
-                  <span className={styles.pixKeyLabel}>Chave PIX:</span>
-                  <div className={styles.pixKeyContainer}>
-                    <code className={styles.pixKey}>
-                      {pixKey}
-                    </code>
-                    <button
-                      type="button"
-                      onClick={copyPixKey}
-                      className={`${styles.copyButton} ${copied ? styles.copied : ''}`}
-                      title="Copiar chave PIX"
-                    >
-                      {copied ? <Check size={16} /> : <Copy size={16} />}
-                      <span className={styles.copyText}>
-                        {copied ? 'Copiado!' : 'Copiar'}
-                      </span>
-                    </button>
-                  </div>
-                </div>
-                <div className={styles.pixValue}>
-                  <strong>Valor: R$ 10,00</strong>
-                </div>
+              <div className={styles.instructions}>
+                <h4>Como pagar:</h4>
+                <ol>
+                  <li>Clique em "Abrir PIX"</li>
+                  <li>Pague R$ {formatarValor(valorFixo)}</li>
+                  <li>Salve o comprovante</li>
+                  <li>Clique no botão verde abaixo</li>
+                </ol>
               </div>
             </div>
 
             <div className={styles.alert}>
-              <p className={styles.alertText}>
-                <strong>Importante:</strong> Após o pagamento PIX, clique no botão abaixo para enviar o comprovante pelo WhatsApp.
-                Sua inscrição só será confirmada após a validação do pagamento.
-              </p>
+              <p><strong>Importante:</strong> Confirme o pagamento via WhatsApp.</p>
             </div>
 
-            {/* Botão do WhatsApp */}
             <button
               type="submit"
-              className={styles.whatsappButton}
+              className={styles.whatsappBtn}
               disabled={!formData.nomeCompleto || !formData.telefone}
             >
               <MessageCircle size={20} />
-              Confirmar Inscrição e Enviar para WhatsApp
+              Enviar para WhatsApp
             </button>
           </form>
         </div>

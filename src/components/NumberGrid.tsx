@@ -78,7 +78,7 @@ export default function NumberGrid() {
                 <span className={styles.medal}>🥇</span>
                 <div className={styles.prizeInfo}>
                   <span className={styles.prizePlace}>1º Lugar</span>
-                  <span className={styles.prizeValue}>R$ 150,00</span>
+                  <span className={styles.prizeValue}>R$ 200,00</span>
                 </div>
               </div>
               <div className={styles.prizeItem}>
@@ -92,7 +92,21 @@ export default function NumberGrid() {
                 <span className={styles.medal}>🥉</span>
                 <div className={styles.prizeInfo}>
                   <span className={styles.prizePlace}>3º Lugar</span>
-                  <span className={styles.prizeValue}>R$ 75,00</span>
+                  <span className={styles.prizeValue}>R$ 50,00</span>
+                </div>
+              </div>
+              <div className={styles.prizeItem}>
+                <span className={styles.medal}>4️⃣</span>
+                <div className={styles.prizeInfo}>
+                  <span className={styles.prizePlace}>4º Lugar</span>
+                  <span className={styles.prizeValue}>R$ 30,00</span>
+                </div>
+              </div>
+              <div className={styles.prizeItem}>
+                <span className={styles.medal}>5️⃣</span>
+                <div className={styles.prizeInfo}>
+                  <span className={styles.prizePlace}>5º Lugar</span>
+                  <span className={styles.prizeValue}>R$ 20,00</span>
                 </div>
               </div>
             </div>
