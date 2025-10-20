@@ -13,40 +13,80 @@ interface NumberModalProps {
 export default function NumberModal({ isOpen, onClose, selectedNumber }: NumberModalProps) {
   const [formData, setFormData] = useState({
     nomeCompleto: '',
-    telefone: ''
+    telefone: '',
+    email: ''
   })
   const [copied, setCopied] = useState(false)
 
-  const whatsappNumber = "14981706898"
   const pixLink = "https://link.mercadopago.com.br/chicofinanceiro"
-  const valorFixo = 10.00 // Mudado para número
+  const valorFixo = 10.00
   
   // Função para formatar o valor para exibição
   const formatarValor = (valor: number) => {
     return valor.toFixed(2).replace('.', ',')
   }
 
+  // Função para validar email
+  const isValidEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(email)
+  }
+
+  // Função para validar telefone (formato brasileiro)
+  const isValidPhone = (phone: string) => {
+    const phoneRegex = /^\(\d{2}\) \d{4,5}-\d{4}$/
+    return phoneRegex.test(phone)
+  }
+
+  // Função para formatar telefone
+  const formatPhone = (value: string) => {
+    const numbers = value.replace(/\D/g, '')
+    if (numbers.length <= 10) {
+      return numbers.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3')
+    } else {
+      return numbers.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3')
+    }
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     
-    if (!formData.nomeCompleto || !formData.telefone) {
-      alert('Preencha todos os campos.')
+    if (!formData.nomeCompleto || !formData.telefone || !formData.email) {
+      alert('Preencha todos os campos obrigatórios.')
       return
     }
 
-    const message = `INSCRIÇÃO NO SORTEIO\n\nNome: ${formData.nomeCompleto}\nTelefone: ${formData.telefone}\nNúmero: ${selectedNumber}\n\nPIX: R$ ${formatarValor(valorFixo)}\nLink: ${pixLink}`
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
+    if (!isValidEmail(formData.email)) {
+      alert('Por favor, insira um e-mail válido.')
+      return
+    }
+
+    if (!isValidPhone(formData.telefone)) {
+      alert('Por favor, insira um telefone válido com DDD.')
+      return
+    }
+
+    // Aqui você pode adicionar a lógica para salvar os dados
+    // ou enviar para um backend, sem abrir o WhatsApp
     
-    window.open(whatsappUrl, '_blank')
+    alert('Inscrição realizada com sucesso! Faça o pagamento PIX para confirmar sua participação.')
     onClose()
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
+    
+    if (name === 'telefone') {
+      setFormData(prev => ({
+        ...prev,
+        [name]: formatPhone(value)
+      }))
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }))
+    }
   }
 
   const copyPixLink = async () => {
@@ -69,6 +109,13 @@ export default function NumberModal({ isOpen, onClose, selectedNumber }: NumberM
   const openPixLink = () => {
     window.open(pixLink, '_blank')
   }
+
+  // Verificar se todos os campos estão preenchidos e válidos
+  const isFormValid = formData.nomeCompleto && 
+                     formData.telefone && 
+                     formData.email && 
+                     isValidEmail(formData.email) && 
+                     isValidPhone(formData.telefone)
 
   if (!isOpen) return null
 
@@ -94,11 +141,12 @@ export default function NumberModal({ isOpen, onClose, selectedNumber }: NumberM
                 onChange={handleInputChange}
                 className={styles.input}
                 placeholder="Seu nome completo"
+                maxLength={100}
               />
             </div>
 
             <div className={styles.formGroup}>
-              <label>Telefone *</label>
+              <label>Telefone com DDD *</label>
               <input
                 type="tel"
                 name="telefone"
@@ -107,7 +155,28 @@ export default function NumberModal({ isOpen, onClose, selectedNumber }: NumberM
                 onChange={handleInputChange}
                 className={styles.input}
                 placeholder="(11) 99999-9999"
+                maxLength={15}
               />
+              {formData.telefone && !isValidPhone(formData.telefone) && (
+                <span className={styles.errorText}>Formato: (DDD) 9XXXX-XXXX</span>
+              )}
+            </div>
+
+            <div className={styles.formGroup}>
+              <label>E-mail *</label>
+              <input
+                type="email"
+                name="email"
+                required
+                value={formData.email}
+                onChange={handleInputChange}
+                className={styles.input}
+                placeholder="seu.email@exemplo.com"
+                maxLength={100}
+              />
+              {formData.email && !isValidEmail(formData.email) && (
+                <span className={styles.errorText}>Digite um e-mail válido</span>
+              )}
             </div>
 
             <div className={styles.pixArea}>
@@ -137,27 +206,28 @@ export default function NumberModal({ isOpen, onClose, selectedNumber }: NumberM
               </div>
 
               <div className={styles.instructions}>
-                <h4>Como pagar:</h4>
+                <h4>Como participar:</h4>
                 <ol>
+                  <li>Preencha seus dados acima</li>
                   <li>Clique em "Abrir PIX"</li>
                   <li>Pague R$ {formatarValor(valorFixo)}</li>
                   <li>Salve o comprovante</li>
-                  <li>Clique no botão verde abaixo</li>
+                  <li>Clique em "Finalizar Compra"</li>
                 </ol>
               </div>
             </div>
 
             <div className={styles.alert}>
-              <p><strong>Importante:</strong> Confirme o pagamento via WhatsApp.</p>
+              <p><strong>Importante:</strong> Sua inscrição só será confirmada após o pagamento.</p>
             </div>
 
             <button
               type="submit"
-              className={styles.whatsappBtn}
-              disabled={!formData.nomeCompleto || !formData.telefone}
+              className={styles.finishButton}
+              disabled={!isFormValid}
             >
               <MessageCircle size={20} />
-              Enviar para WhatsApp
+              Finalizar Compra
             </button>
           </form>
         </div>

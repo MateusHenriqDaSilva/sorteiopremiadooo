@@ -55,6 +55,12 @@
   cursor: pointer;
   color: white;
   flex-shrink: 0; /* Impede que o botão encolha */
+  transition: all 0.3s ease;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
 }
 
 .content {
@@ -71,6 +77,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  position: relative;
 }
 
 .formGroup label {
@@ -85,11 +92,30 @@
   font-size: 1rem;
   width: 100%;
   box-sizing: border-box; /* IMPORTANTE: inclui padding na largura */
+  transition: all 0.3s ease;
 }
 
 .input:focus {
   outline: none;
   border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.input:invalid:not(:focus):not(:placeholder-shown) {
+  border-color: #e53e3e;
+}
+
+.input:valid:not(:focus):not(:placeholder-shown) {
+  border-color: #48bb78;
+}
+
+/* Mensagens de erro */
+.errorText {
+  color: #e53e3e;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  display: block;
+  font-weight: 500;
 }
 
 .pixArea {
@@ -142,6 +168,7 @@
   display: block;
   font-weight: 600;
   margin-bottom: 0.5rem;
+  color: #374151;
 }
 
 .pixLinkBox code {
@@ -170,14 +197,15 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.75rem 1rem; /* Aumentado para mobile */
+  padding: 0.75rem 1rem;
   border: none;
   border-radius: 6px;
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   flex: 1;
-  min-height: 44px; /* Tamanho mínimo para touch */
+  min-height: 44px;
+  transition: all 0.3s ease;
 }
 
 .copyBtn {
@@ -185,9 +213,19 @@
   color: white;
 }
 
+.copyBtn:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
 .openBtn {
   background: #8b5cf6;
   color: white;
+}
+
+.openBtn:hover {
+  background: #7c3aed;
+  transform: translateY(-1px);
 }
 
 .instructions {
@@ -210,6 +248,7 @@
 
 .instructions li {
   margin-bottom: 0.25rem;
+  line-height: 1.4;
 }
 
 .alert {
@@ -223,9 +262,11 @@
   margin: 0;
   color: #92400e;
   font-size: 0.9rem;
+  line-height: 1.4;
 }
 
-.whatsappBtn {
+/* Botão Finalizar Compra */
+.finishButton {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -239,20 +280,46 @@
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  min-height: 50px; /* Tamanho bom para touch */
+  transition: all 0.3s ease;
+  min-height: 50px;
 }
 
-.whatsappBtn:disabled {
+.finishButton:not(:disabled):hover {
+  background: #128c7e;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+}
+
+.finishButton:disabled {
   background: #9ca3af;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Indicadores de validação */
+.validationIndicator {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+}
+
+.validIndicator {
+  color: #48bb78;
+}
+
+.invalidIndicator {
+  color: #e53e3e;
 }
 
 /* MOBILE FIRST APPROACH */
 @media (max-width: 768px) {
   .overlay {
     padding: 0.5rem;
-    align-items: flex-start; /* Começa do topo no mobile */
-    padding-top: 2rem; /* Espaço para status bar */
+    align-items: flex-start;
+    padding-top: 2rem;
   }
 
   .modal {
@@ -289,11 +356,15 @@
   }
 
   .buttons {
-    flex-direction: column; /* Botões empilhados no mobile */
+    flex-direction: column;
   }
 
   .copyBtn, .openBtn {
     width: 100%;
+  }
+
+  .form {
+    gap: 0.875rem;
   }
 }
 
@@ -340,6 +411,17 @@
   .alert {
     padding: 0.875rem;
   }
+
+  .input {
+    padding: 0.625rem;
+    font-size: 0.9rem;
+  }
+
+  .finishButton {
+    padding: 0.875rem;
+    font-size: 0.9rem;
+    min-height: 45px;
+  }
 }
 
 /* Para telas muito pequenas */
@@ -348,19 +430,59 @@
     font-size: 1.1rem;
   }
 
-  .input {
-    padding: 0.625rem;
-    font-size: 0.9rem;
-  }
-
   .pixValue {
     font-size: 1rem;
     flex-direction: column;
     gap: 0.25rem;
   }
 
-  .whatsappBtn {
-    padding: 0.875rem;
-    font-size: 0.9rem;
+  .formGroup {
+    gap: 0.375rem;
   }
-} 
+
+  .errorText {
+    font-size: 0.75rem;
+  }
+
+  .copyBtn, .openBtn {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.85rem;
+    min-height: 40px;
+  }
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Estados de foco melhorados */
+.input:focus {
+  transform: translateY(-1px);
+}
+
+/* Feedback visual para campos obrigatórios */
+.formGroup label::after {
+  content: " *";
+  color: #e53e3e;
+}
+
+/* Melhor espaçamento para lista de instruções */
+.instructions ol {
+  line-height: 1.6;
+}
+
+.instructions li {
+  margin-bottom: 0.5rem;
+}
